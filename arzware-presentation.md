@@ -70,3 +70,12 @@ Arzware bridges this gap. Talent gains experience by solving real problems for b
 **Startups** get exposure, projects, partnerships, and market access.  
 **Small Businesses** get affordable support, trusted partners, and growth tools.  
 **The Community** grows stronger through collaboration and shared resources.
+
+---
+
+## Slide 7: Thank You
+*Let's build the future together.*
+
+Scan the QR code to visit our website and learn more about how we can help you grow.
+
+[**Visit Arzware.net**](https://arzware.net)
