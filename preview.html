@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arzware Presentation</title>
+  <style>
+    :root {
+      --bg: #080b09;
+      --panel: #111713;
+      --panel-2: #172019;
+      --text: #f5f1e8;
+      --muted: #bdb5a3;
+      --accent: #d7a83f;
+      --green: #77a878;
+      --line: rgba(245, 241, 232, 0.16);
+      --dark-line: rgba(0, 0, 0, 0.28);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      background:
+        linear-gradient(135deg, rgba(119, 168, 120, 0.12), transparent 36%),
+        radial-gradient(circle at 88% 12%, rgba(215, 168, 63, 0.16), transparent 28%),
+        var(--bg);
+    }
+
+    .viewport {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .track {
+      height: 100%;
+      display: flex;
+      transition: transform 520ms cubic-bezier(.22,.8,.22,1);
+      will-change: transform;
+    }
+
+    .slide {
+      flex: 0 0 100vw;
+      height: 100vh;
+      padding: clamp(42px, 5vw, 80px);
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 34px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(245,241,232,0.055), rgba(245,241,232,0.018)),
+        linear-gradient(180deg, rgba(17,23,19,0.97), rgba(10,14,11,0.97));
+      box-shadow: 0 30px 100px rgba(0,0,0,0.38);
+    }
+
+    .slide::after {
+      content: "";
+      position: absolute;
+      top: 34px;
+      bottom: 34px;
+      left: 34px;
+      width: 9px;
+      background: linear-gradient(180deg, var(--accent), var(--green));
+    }
+
+    .content {
+      width: min(1120px, 86vw);
+      position: relative;
+      z-index: 2;
+    }
+
+    .kicker {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 850;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 44px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    h1, h2 {
+      margin: 0;
+      max-width: 990px;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      line-height: 0.95;
+    }
+
+    h1 { font-size: clamp(58px, 8vw, 114px); }
+    h2 { font-size: clamp(48px, 6.4vw, 86px); }
+
+    .lead {
+      max-width: 930px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: clamp(23px, 2.4vw, 34px);
+      line-height: 1.22;
+      font-weight: 500;
+    }
+
+    .lead strong { color: var(--text); font-weight: 850; }
+
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 44px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      background: rgba(119,168,120,0.12);
+      padding: 14px 22px;
+      font-size: clamp(17px, 1.45vw, 24px);
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .arrow { color: var(--accent); font-size: 30px; font-weight: 900; }
+
+    .grid-3, .grid-4, .impact-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 42px;
+    }
+
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .impact-grid { grid-template-columns: repeat(4, 1fr); }
+
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      padding: 28px;
+      min-height: 190px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .card .num {
+      display: inline-grid;
+      place-items: center;
+      min-width: 42px;
+      height: 34px;
+      padding: 0 10px;
+      margin-bottom: 18px;
+      background: var(--accent);
+      color: #12100a;
+      font-weight: 950;
+      font-size: 15px;
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      color: var(--text);
+      font-size: clamp(21px, 1.8vw, 30px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(16px, 1.25vw, 21px);
+      line-height: 1.35;
+    }
+
+    .statement {
+      margin-top: 34px;
+      padding-left: 28px;
+      border-left: 4px solid var(--accent);
+      color: var(--text);
+      font-size: clamp(25px, 2.5vw, 38px);
+      line-height: 1.18;
+      font-weight: 800;
+      max-width: 1000px;
+    }
+
+    .problem-card {
+      border-left: 5px solid rgba(215,168,63,0.95);
+    }
+
+    .solution-card {
+      border-left: 5px solid rgba(119,168,120,0.95);
+    }
+
+    .footer {
+      position: absolute;
+      right: 62px;
+      bottom: 52px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: rgba(245,241,232,0.52);
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+    }
+
+    .progress {
+      width: 116px;
+      height: 3px;
+      background: rgba(245,241,232,0.18);
+      overflow: hidden;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: calc((var(--index) / 6) * 100%);
+      background: var(--accent);
+    }
+
+    .controls {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border: 1px solid rgba(245,241,232,0.5);
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .dot.active { background: var(--accent); border-color: var(--accent); }
+
+    .hint {
+      position: fixed;
+      left: 56px;
+      bottom: 49px;
+      z-index: 10;
+      color: rgba(245,241,232,0.42);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .slide { padding: 28px; }
+      .slide::before { inset: 18px; }
+      .slide::after { top: 18px; bottom: 18px; left: 18px; width: 6px; }
+      .content { width: min(100%, 84vw); }
+      .grid-3, .grid-4, .impact-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 26px; }
+      .card { min-height: auto; padding: 18px; }
+      .hint { display: none; }
+      .footer { right: 32px; bottom: 32px; }
+      .controls { bottom: 14px; }
+    }
+
+    @media print {
+      html, body { overflow: visible; height: auto; background: white; }
+      .viewport { height: auto; overflow: visible; }
+      .track { display: block; transform: none !important; }
+      .slide { page-break-after: always; height: 100vh; color: #111; background: white; }
+      .slide::before { box-shadow: none; background: white; border-color: #ddd; }
+      .controls, .hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="viewport" aria-label="Arzware slide deck">
+    <main class="track" id="track">
+      <section class="slide" style="--index:1">
+        <div class="content">
+          <div class="kicker">Arzware</div>
+          <h1>Community-driven digital growth.</h1>
+          <p class="lead"><strong>Arzware</strong> helps youth, startups, and small businesses grow together through real experience, digital solutions, and trusted partnerships.</p>
+          <div class="flow">
+            <div class="pill">Youth</div><div class="arrow">→</div>
+            <div class="pill">Startups</div><div class="arrow">→</div>
+            <div class="pill">Small Businesses</div>
+          </div>
+        </div>
+        <div class="footer"><div class="progress"><span></span></div>01 / 06</div>
+      </section>
+
+      <section class="slide" style="--index:2">
+        <div class="content">
+          <div class="kicker">What we do</div>
+          <h2>Three areas. One ecosystem.</h2>
+          <div class="grid-3">
+            <div class="card">
+              <div class="num">01</div>
+              <h3>Youth Development</h3>
+              <p>We prepare youth for real work through job-readiness training and practical experience.</p>
+            </div>
+            <div class="card">
+              <div class="num">02</div>
+              <h3>Digital Support</h3>
+              <p>We help small businesses with websites, branding, digital tools, automation, and growth support.</p>
+            </div>
+            <div class="card">
+              <div class="num">03</div>
+              <h3>Trusted Partnerships</h3>
+              <p>We connect businesses with startups, freelancers, and professionals from our community.</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><div class="progress"><span></span></div>02 / 06</div>
+      </section>
+
+      <section class="slide" style="--index:3">
+        <div class="content">
+          <div class="kicker">Why we exist</div>
+          <h2>Potential is everywhere. Access is not.</h2>
+          <p class="lead">Many young people have potential but lack experience. Many small businesses want to grow but lack affordable support, trusted partners, and the right ecosystem.</p>
+          <div class="statement">Arzware brings both sides together so youth gain experience, businesses grow, and the community becomes stronger.</div>
+        </div>
+        <div class="footer"><div class="progress"><span></span></div>03 / 06</div>
+      </section>
+
+      <section class="slide" style="--index:4">
+        <div class="content">
+          <div class="kicker">Problems we see</div>
+          <h2>Four gaps holding growth back.</h2>
+          <div class="grid-4">
+            <div class="card problem-card">
+              <div class="num">P1</div>
+              <h3>Youth struggle to find jobs</h3>
+              <p>They often lack readiness, real experience, and exposure to practical work.</p>
+            </div>
+            <div class="card problem-card">
+              <div class="num">P2</div>
+              <h3>Businesses lack trusted partners</h3>
+              <p>Many rely only on the owner's network for digital, marketing, and growth needs.</p>
+            </div>
+            <div class="card problem-card">
+              <div class="num">P3</div>
+              <h3>Small businesses lack an ecosystem</h3>
+              <p>They have talent and ambition, but not the support system larger companies take for granted.</p>
+            </div>
+            <div class="card problem-card">
+              <div class="num">P4</div>
+              <h3>Professional services are expensive</h3>
+              <p>Agencies and expert services are often too costly for small businesses.</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><div class="progress"><span></span></div>04 / 06</div>
+      </section>
+
+      <section class="slide" style="--index:5">
+        <div class="content">
+          <div class="kicker">Our solutions</div>
+          <h2>Practical support from inside the community.</h2>
+          <div class="grid-4">
+            <div class="card solution-card">
+              <div class="num">S1</div>
+              <h3>Prepare youth for real work</h3>
+              <p>We boost job readiness and experience across many different fields.</p>
+            </div>
+            <div class="card solution-card">
+              <div class="num">S2</div>
+              <h3>Connect trusted partners</h3>
+              <p>We connect businesses with startups and professionals from the Arzware network.</p>
+            </div>
+            <div class="card solution-card">
+              <div class="num">S3</div>
+              <h3>Build the ecosystem</h3>
+              <p>We combine community, technology, and partnerships so small businesses can scale together.</p>
+            </div>
+            <div class="card solution-card">
+              <div class="num">S4</div>
+              <h3>Create affordable partnerships</h3>
+              <p>We match small businesses with emerging professionals seeking experience and exposure.</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><div class="progress"><span></span></div>05 / 06</div>
+      </section>
+
+      <section class="slide" style="--index:6">
+        <div class="content">
+          <div class="kicker">Impact</div>
+          <h2>Disconnected potential becomes a working growth ecosystem.</h2>
+          <div class="impact-grid">
+            <div class="card">
+              <div class="num">01</div>
+              <h3>Youth</h3>
+              <p>Readiness, experience, confidence, and real opportunities.</p>
+            </div>
+            <div class="card">
+              <div class="num">02</div>
+              <h3>Startups</h3>
+              <p>Exposure, projects, partnerships, and market access.</p>
+            </div>
+            <div class="card">
+              <div class="num">03</div>
+              <h3>Businesses</h3>
+              <p>Affordable support, trusted partners, and growth tools.</p>
+            </div>
+            <div class="card">
+              <div class="num">04</div>
+              <h3>Community</h3>
+              <p>A stronger network where people and businesses scale together.</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><div class="progress"><span></span></div>06 / 06</div>
+      </section>
+    </main>
+  </div>
+
+  <div class="hint">Use ← → or ↑ ↓</div>
+  <nav class="controls" aria-label="Slide navigation">
+    <button class="dot active" aria-label="Go to slide 1"></button>
+    <button class="dot" aria-label="Go to slide 2"></button>
+    <button class="dot" aria-label="Go to slide 3"></button>
+    <button class="dot" aria-label="Go to slide 4"></button>
+    <button class="dot" aria-label="Go to slide 5"></button>
+    <button class="dot" aria-label="Go to slide 6"></button>
+  </nav>
+
+  <script>
+    const track = document.getElementById('track');
+    const dots = Array.from(document.querySelectorAll('.dot'));
+    const total = dots.length;
+    let index = 0;
+
+    function goTo(nextIndex) {
+      index = Math.max(0, Math.min(total - 1, nextIndex));
+      track.style.transform = `translateX(-${index * 100}vw)`;
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+    }
+
+    function next() { goTo(index + 1); }
+    function previous() { goTo(index - 1); }
+
+    document.addEventListener('keydown', (event) => {
+      const forward = ['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'];
+      const backward = ['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'];
+
+      if (forward.includes(event.key)) {
+        event.preventDefault();
+        next();
+      }
+      if (backward.includes(event.key)) {
+        event.preventDefault();
+        previous();
+      }
+      if (event.key === 'Home') goTo(0);
+      if (event.key === 'End') goTo(total - 1);
+    });
+
+    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    window.addEventListener('touchstart', (event) => {
+      touchStartX = event.changedTouches[0].screenX;
+      touchStartY = event.changedTouches[0].screenY;
+    }, { passive: true });
+
+    window.addEventListener('touchend', (event) => {
+      const dx = event.changedTouches[0].screenX - touchStartX;
+      const dy = event.changedTouches[0].screenY - touchStartY;
+      if (Math.abs(dx) > 50 || Math.abs(dy) > 50) {
+        if (dx < -50 || dy < -50) next();
+        if (dx > 50 || dy > 50) previous();
+      }
+    }, { passive: true });
+  </script>
+</body>
+</html>
