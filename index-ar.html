@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arzware Presentation</title>
+  <title>أرزوير - نمو رقمي متسارع</title>
   <style>
     :root {
       /* Theme: Midnight & Electric Blue */
@@ -27,13 +27,13 @@
       overflow: hidden;
       background: var(--bg);
       color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 
     body {
       background:
-        radial-gradient(circle at 80% 0%, rgba(59, 130, 246, 0.12), transparent 40%),
-        radial-gradient(circle at 20% 100%, rgba(16, 185, 129, 0.08), transparent 40%),
+        radial-gradient(circle at 20% 0%, rgba(59, 130, 246, 0.12), transparent 40%),
+        radial-gradient(circle at 80% 100%, rgba(16, 185, 129, 0.08), transparent 40%),
         var(--bg);
     }
 
@@ -79,11 +79,11 @@
       position: absolute;
       top: 34px;
       bottom: 34px;
-      left: 34px;
+      right: 34px;
       width: 6px;
       background: linear-gradient(180deg, var(--accent), var(--green));
-      border-top-left-radius: 8px;
-      border-bottom-left-radius: 8px;
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
     }
 
     .content {
@@ -116,18 +116,18 @@
       max-width: 990px;
       font-weight: 900;
       letter-spacing: -0.04em;
-      line-height: 1.05;
+      line-height: 1.15;
     }
 
-    h1 { font-size: clamp(58px, 8vw, 104px); }
-    h2 { font-size: clamp(48px, 6.4vw, 86px); }
+    h1 { font-size: clamp(54px, 7.5vw, 98px); }
+    h2 { font-size: clamp(44px, 6vw, 80px); }
 
     .lead {
       max-width: 930px;
       margin: 28px 0 0;
       color: var(--muted);
       font-size: clamp(23px, 2.4vw, 34px);
-      line-height: 1.25;
+      line-height: 1.4;
       font-weight: 500;
     }
 
@@ -147,8 +147,7 @@
       padding: 14px 22px;
       font-size: clamp(17px, 1.45vw, 24px);
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.02em;
       border-radius: 4px;
     }
 
@@ -191,30 +190,43 @@
       margin: 0 0 12px;
       color: var(--text);
       font-size: clamp(21px, 1.8vw, 28px);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
     }
 
     .card p {
       margin: 0;
       color: var(--muted);
       font-size: clamp(16px, 1.25vw, 20px);
-      line-height: 1.4;
+      line-height: 1.6;
+    }
+    
+    .card.impact-list p {
+        margin-bottom: 8px;
+        position: relative;
+        padding-right: 18px;
+    }
+    
+    .card.impact-list p::before {
+        content: "•";
+        position: absolute;
+        right: 0;
+        color: var(--accent);
     }
 
     .statement {
       margin-top: 34px;
-      padding-left: 28px;
-      border-left: 4px solid var(--accent);
+      padding-right: 28px;
+      border-right: 4px solid var(--accent);
       color: var(--text);
-      font-size: clamp(25px, 2.5vw, 36px);
-      line-height: 1.25;
+      font-size: clamp(24px, 2.5vw, 34px);
+      line-height: 1.4;
       font-weight: 700;
       max-width: 1000px;
     }
 
     .problem-card {
-      border-left: 4px solid #EF4444; /* Red for problem */
+      border-right: 4px solid #EF4444; /* Red for problem */
     }
 
     .problem-card .num {
@@ -222,7 +234,7 @@
     }
 
     .solution-card {
-      border-left: 4px solid var(--green); /* Green for solution */
+      border-right: 4px solid var(--green); /* Green for solution */
     }
 
     .solution-card .num {
@@ -232,7 +244,7 @@
 
     .footer {
       position: absolute;
-      right: 62px;
+      left: 62px;
       bottom: 52px;
       z-index: 3;
       display: flex;
@@ -257,13 +269,14 @@
       height: 100%;
       width: calc((var(--index) / 6) * 100%);
       background: var(--accent);
+      transform-origin: right;
     }
 
     .controls {
       position: fixed;
       left: 50%;
       bottom: 22px;
-      transform: translateX(-50%);
+      transform: translateX(-50%); /* Using -50% here works correctly for centering */
       z-index: 10;
       display: flex;
       gap: 10px;
@@ -283,25 +296,24 @@
 
     .hint {
       position: fixed;
-      left: 56px;
+      right: 56px;
       bottom: 49px;
       z-index: 10;
       color: rgba(255,255,255,0.4);
       font-size: 13px;
       font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
     @media (max-width: 900px) {
       .slide { padding: 28px; }
       .slide::before { inset: 18px; }
-      .slide::after { top: 18px; bottom: 18px; left: 18px; width: 4px; }
+      .slide::after { top: 18px; bottom: 18px; right: 18px; width: 4px; }
       .content { width: min(100%, 84vw); }
       .grid-3, .grid-4, .impact-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 26px; }
       .card { min-height: auto; padding: 18px; }
       .hint { display: none; }
-      .footer { right: 32px; bottom: 32px; }
+      .footer { left: 32px; bottom: 32px; }
       .controls { bottom: 14px; }
     }
   </style>
@@ -312,13 +324,13 @@
       <!-- SLIDE 1: Title -->
       <section class="slide" style="--index:1">
         <div class="content">
-          <div class="kicker">Arzware</div>
-          <h1>Accelerated Digital Growth.</h1>
-          <p class="lead"><strong>Arzware</strong> connects emerging talent, startups, and small businesses to build, scale, and succeed together.</p>
+          <div class="kicker">أرزوير</div>
+          <h1>نمو رقمي متسارع.</h1>
+          <p class="lead"><strong>أرزوير (Arzware)</strong> تربط بين المواهب الناشئة، الشركات الناشئة، والشركات الصغيرة والمتوسطة للبناء، والنمو، والنجاح معاً.</p>
           <div class="flow">
-            <div class="pill">Emerging Talent</div><div class="arrow">→</div>
-            <div class="pill">Startups</div><div class="arrow">→</div>
-            <div class="pill">Small Businesses</div>
+            <div class="pill">المواهب الناشئة</div><div class="arrow">←</div>
+            <div class="pill">الشركات الناشئة</div><div class="arrow">←</div>
+            <div class="pill">الشركات الصغيرة والمتوسطة</div>
           </div>
         </div>
         <div class="footer"><div class="progress"><span></span></div>01 / 06</div>
@@ -327,28 +339,28 @@
       <!-- SLIDE 2: Problems -->
       <section class="slide" style="--index:2">
         <div class="content">
-          <div class="kicker">The Market Gap</div>
-          <h2>Four gaps holding growth back.</h2>
+          <div class="kicker">الفجوة في السوق</div>
+          <h2>أربع فجوات تعيق النمو.</h2>
           <div class="grid-4">
             <div class="card problem-card">
-              <div class="num">P1</div>
-              <h3>The Experience Gap</h3>
-              <p>Emerging talent lacks practical, real-world exposure and job-readiness.</p>
+              <div class="num">م1</div>
+              <h3>فجوة الخبرة</h3>
+              <p>تفتقر المواهب الناشئة إلى الخبرة العملية والجاهزية لسوق العمل.</p>
             </div>
             <div class="card problem-card">
-              <div class="num">P2</div>
-              <h3>The Trust Deficit</h3>
-              <p>Businesses struggle to find trusted partners for digital, marketing, and growth needs.</p>
+              <div class="num">م2</div>
+              <h3>فجوة الثقة</h3>
+              <p>تواجه الشركات صعوبة في العثور على شركاء موثوقين لتلبية احتياجاتها الرقمية والتسويقية.</p>
             </div>
             <div class="card problem-card">
-              <div class="num">P3</div>
-              <h3>Missing Infrastructure</h3>
-              <p>Small businesses have ambition, but lack the shared infrastructure larger companies rely on.</p>
+              <div class="num">م3</div>
+              <h3>غياب البنية المشتركة</h3>
+              <p>تمتلك الشركات الصغيرة والمتوسطة الطموح، لكنها تفتقر إلى بنية الدعم المشتركة التي تعتمد عليها الشركات الكبرى.</p>
             </div>
             <div class="card problem-card">
-              <div class="num">P4</div>
-              <h3>High Agency Costs</h3>
-              <p>Professional agencies and expert services are often too expensive for small businesses.</p>
+              <div class="num">م4</div>
+              <h3>ارتفاع التكاليف</h3>
+              <p>غالباً ما تكون تكاليف الوكالات والخدمات الاحترافية باهظة ولا تناسب ميزانية الشركات الصغيرة.</p>
             </div>
           </div>
         </div>
@@ -358,28 +370,28 @@
       <!-- SLIDE 3: Solutions -->
       <section class="slide" style="--index:3">
         <div class="content">
-          <div class="kicker">The Arzware Solution</div>
-          <h2>Practical support from inside the network.</h2>
+          <div class="kicker">حلول أرزوير</div>
+          <h2>دعم عملي من داخل الشبكة.</h2>
           <div class="grid-4">
             <div class="card solution-card">
-              <div class="num">S1</div>
-              <h3>Practical Experience</h3>
-              <p>We boost job-readiness by providing emerging talent with real project experience.</p>
+              <div class="num">ح1</div>
+              <h3>خبرة عملية</h3>
+              <p>نعزز جاهزية المواهب الناشئة من خلال التدريب والتجربة في مشاريع حقيقية.</p>
             </div>
             <div class="card solution-card">
-              <div class="num">S2</div>
-              <h3>Trusted Connections</h3>
-              <p>We connect businesses directly with vetted startups and professionals.</p>
+              <div class="num">ح2</div>
+              <h3>شبكة موثوقة</h3>
+              <p>نربط الشركات بشكل مباشر مع شركاء ومهنيين موثوقين من مجتمعنا.</p>
             </div>
             <div class="card solution-card">
-              <div class="num">S3</div>
-              <h3>Shared Infrastructure</h3>
-              <p>We combine community, technology, and partnerships so businesses can scale together.</p>
+              <div class="num">ح3</div>
+              <h3>بنية دعم مشتركة</h3>
+              <p>نوفر بنية دعم مشتركة تجمع بين المجتمع التقني والشراكات لمساعدة الشركات على النمو معاً.</p>
             </div>
             <div class="card solution-card">
-              <div class="num">S4</div>
-              <h3>Cost-Effective Execution</h3>
-              <p>We deliver affordable execution by matching small businesses with emerging professionals.</p>
+              <div class="num">ح4</div>
+              <h3>تنفيذ بتكلفة مناسبة</h3>
+              <p>نوفر خيارات تنفيذ بأسعار مناسبة من خلال ربط الشركات الصغيرة مع المهنيين والمواهب الناشئة.</p>
             </div>
           </div>
         </div>
@@ -389,23 +401,23 @@
       <!-- SLIDE 4: What We Do -->
       <section class="slide" style="--index:4">
         <div class="content">
-          <div class="kicker">How We Operate</div>
-          <h2>Three pillars. One network.</h2>
+          <div class="kicker">آلية عملنا</div>
+          <h2>ثلاث ركائز. شبكة واحدة.</h2>
           <div class="grid-3">
             <div class="card">
               <div class="num">01</div>
-              <h3>Talent Acceleration</h3>
-              <p>Preparing emerging talent for real work through hands-on experience.</p>
+              <h3>تسريع جاهزية المواهب</h3>
+              <p>إعداد المواهب الناشئة لسوق العمل من خلال تجارب عملية ومشاريع حقيقية.</p>
             </div>
             <div class="card">
               <div class="num">02</div>
-              <h3>Digital Services</h3>
-              <p>Helping small businesses with websites, branding, automation, and growth support.</p>
+              <h3>الخدمات الرقمية</h3>
+              <p>مساعدة الشركات الصغيرة في بناء المواقع، تصميم الهوية، الأتمتة، ودعم النمو.</p>
             </div>
             <div class="card">
               <div class="num">03</div>
-              <h3>Strategic Partnerships</h3>
-              <p>Connecting businesses with trusted startups, freelancers, and professionals.</p>
+              <h3>الشراكات الاستراتيجية</h3>
+              <p>ربط الشركات مع شبكة موثوقة من الشركات الناشئة والمستقلين والمهنيين.</p>
             </div>
           </div>
         </div>
@@ -415,10 +427,15 @@
       <!-- SLIDE 5: The Model -->
       <section class="slide" style="--index:5">
         <div class="content">
-          <div class="kicker">The Model</div>
-          <h2>Turning market inefficiencies into mutual growth.</h2>
-          <p class="lead">The market is inefficient. Emerging talent lacks experience, and small businesses lack affordable support.</p>
-          <div class="statement">Arzware bridges this gap. Talent gains experience by solving real problems for businesses that need cost-effective scale.</div>
+          <div class="kicker">نموذج العمل</div>
+          <h2>تحويل فجوات السوق إلى نمو متبادل.</h2>
+          <p class="lead">نحول التحديات إلى فرص للنمو المتبادل لتجاوز عقبات السوق، عبر نموذج يعود بالنفع على الجميع.</p>
+          <div class="card impact-list" style="margin-top: 34px; max-width: 900px; padding: 34px;">
+              <p>تكتسب المواهب الناشئة خبرة عملية حقيقية.</p>
+              <p>تحصل الشركات الصغيرة والمتوسطة على دعم بتكلفة مناسبة.</p>
+              <p>تحصل الشركات الناشئة والمهنيون على فرص ومشاريع جديدة.</p>
+              <p>يصبح مجتمع الأعمال أقوى من خلال التعاون المستمر.</p>
+          </div>
         </div>
         <div class="footer"><div class="progress"><span></span></div>05 / 06</div>
       </section>
@@ -426,28 +443,28 @@
       <!-- SLIDE 6: Impact -->
       <section class="slide" style="--index:6">
         <div class="content">
-          <div class="kicker">Impact</div>
-          <h2>Disconnected potential becomes a working growth engine.</h2>
+          <div class="kicker">الأثر</div>
+          <h2>تحويل الطاقات الكامنة إلى محرك نمو فعّال.</h2>
           <div class="impact-grid">
             <div class="card">
               <div class="num">01</div>
-              <h3>Emerging Talent</h3>
-              <p>Readiness, experience, confidence, and real opportunities.</p>
+              <h3>المواهب الناشئة</h3>
+              <p>الجاهزية، الخبرة، الثقة، وفرص عمل حقيقية.</p>
             </div>
             <div class="card">
               <div class="num">02</div>
-              <h3>Startups</h3>
-              <p>Exposure, projects, partnerships, and market access.</p>
+              <h3>الشركات الناشئة</h3>
+              <p>الانتشار، الشراكات، والوصول إلى أسواق جديدة.</p>
             </div>
             <div class="card">
               <div class="num">03</div>
-              <h3>Businesses</h3>
-              <p>Affordable support, trusted partners, and growth tools.</p>
+              <h3>الشركات الصغيرة والمتوسطة</h3>
+              <p>دعم بتكلفة مناسبة، شركاء موثوقون، وأدوات للنمو.</p>
             </div>
             <div class="card">
               <div class="num">04</div>
-              <h3>Community</h3>
-              <p>A stronger network where people and businesses scale together.</p>
+              <h3>المجتمع</h3>
+              <p>منظومة أعمال محلية قوية تنمو فيها الشركات والأفراد معاً.</p>
             </div>
           </div>
         </div>
@@ -456,14 +473,14 @@
     </main>
   </div>
 
-  <div class="hint">Use ← → or ↑ ↓</div>
+  <div class="hint">استخدم الأسهم ← → للتنقل</div>
   <nav class="controls" aria-label="Slide navigation">
-    <button class="dot active" aria-label="Go to slide 1"></button>
-    <button class="dot" aria-label="Go to slide 2"></button>
-    <button class="dot" aria-label="Go to slide 3"></button>
-    <button class="dot" aria-label="Go to slide 4"></button>
-    <button class="dot" aria-label="Go to slide 5"></button>
-    <button class="dot" aria-label="Go to slide 6"></button>
+    <button class="dot active" aria-label="الشريحة 1"></button>
+    <button class="dot" aria-label="الشريحة 2"></button>
+    <button class="dot" aria-label="الشريحة 3"></button>
+    <button class="dot" aria-label="الشريحة 4"></button>
+    <button class="dot" aria-label="الشريحة 5"></button>
+    <button class="dot" aria-label="الشريحة 6"></button>
   </nav>
 
   <script>
@@ -474,7 +491,8 @@
 
     function goTo(nextIndex) {
       index = Math.max(0, Math.min(total - 1, nextIndex));
-      track.style.transform = `translateX(-${index * 100}vw)`;
+      // In RTL, translateX positive moves container to the right, showing item on the left.
+      track.style.transform = `translateX(${index * 100}vw)`;
       dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
     }
 
@@ -482,8 +500,9 @@
     function previous() { goTo(index - 1); }
 
     document.addEventListener('keydown', (event) => {
-      const forward = ['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'];
-      const backward = ['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'];
+      // Arabic reading order is Right to Left. Next slide is on the left.
+      const forward = ['ArrowLeft', 'ArrowDown', 'PageDown', ' ', 'Enter'];
+      const backward = ['ArrowRight', 'ArrowUp', 'PageUp', 'Backspace'];
 
       if (forward.includes(event.key)) {
         event.preventDefault();
@@ -511,8 +530,10 @@
       const dx = event.changedTouches[0].screenX - touchStartX;
       const dy = event.changedTouches[0].screenY - touchStartY;
       if (Math.abs(dx) > 50 || Math.abs(dy) > 50) {
-        if (dx < -50 || dy < -50) next();
-        if (dx > 50 || dy > 50) previous();
+        // swipe right (dx > 50) means pulling the screen right, revealing left content (next slide)
+        if (dx > 50 || dy < -50) next();
+        // swipe left (dx < -50) means pulling the screen left, revealing right content (previous slide)
+        if (dx < -50 || dy > 50) previous();
       }
     }, { passive: true });
   </script>
